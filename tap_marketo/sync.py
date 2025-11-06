@@ -450,7 +450,7 @@ def sync_paginated(client, state, stream, endpoint_prefix=""):
                     singer.write_record(stream["tap_stream_id"], record, time_extracted=time_extracted)
 
         # If moreResult in data is False, break
-        if not data["moreResult"]:
+        if not data.get("moreResult"):
             break
 
         # Store the next page token in state and continue.
