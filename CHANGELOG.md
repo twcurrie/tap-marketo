@@ -1,14 +1,5 @@
 # Changelog
 
-## 2.7.0
-  * Add `valid-replication-keys` and `forced-replication-method` fields to catalog metadata for better incremental replication control [#104](https://github.com/singer-io/tap-marketo/pull/104)
-
-## 2.6.4
-  * Bump dependency versions for twistlock compliance [#99](https://github.com/singer-io/tap-marketo/pull/99)
-
-## 2.6.3
-  * Removes `inclusion : automatic` from stream level catalog metadata [#98](https://github.com/singer-io/tap-marketo/pull/98)
-
 ## 2.6.2
   * Move test dependencies to `extras_require` and pin them [#96](https://github.com/singer-io/tap-marketo/pull/96)
 
