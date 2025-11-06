@@ -2,20 +2,20 @@ version: 2
 jobs:
   build:
     docker:
-      - image: 218546966473.dkr.ecr.us-east-1.amazonaws.com/circle-ci:stitch-tap-tester
+      - image: 218546966473.dkr.ecr.us-east-1.amazonaws.com/circle-ci:stitch-tap-tester-uv
     steps:
       - checkout
       - run:
           name: 'Setup'
           command: |
-            virtualenv -p python3 ~/.virtualenvs/tap-marketo
-            source ~/.virtualenvs/tap-marketo/bin/activate
-            pip install .[test]
-            pip install pylint
+            uv venv --python 3.11 /usr/local/share/virtualenvs/tap-marketo
+            source /usr/local/share/virtualenvs/tap-marketo/bin/activate
+            uv pip install .[test]
+            uv pip install pylint
       - run:
           name: 'Pylint'
           command: |
-            source ~/.virtualenvs/tap-marketo/bin/activate
+            source /usr/local/share/virtualenvs/tap-marketo/bin/activate
             pylint tap_marketo -d C,R,W
       - run:
           name: 'JSON Validator'
@@ -25,8 +25,8 @@ jobs:
       - run:
           name: 'Unit Tests'
           command: |
-            source ~/.virtualenvs/tap-marketo/bin/activate
-            pip install nose2 parameterized nose2[coverage_plugin]>=0.6.5
+            source /usr/local/share/virtualenvs/tap-marketo/bin/activate
+            uv pip install nose2 parameterized nose2[coverage_plugin]>=0.6.5
             nose2 --with-coverage -v -s tests
       - store_test_results:
           path: test_output/report.xml
